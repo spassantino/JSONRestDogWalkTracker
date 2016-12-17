@@ -34,14 +34,15 @@ public class WalkController {
 	}
 
 	@RequestMapping(value = "walk", method = RequestMethod.POST)
-	public Walk create(@RequestBody String walkJSON) {
+	public List<Walk> create(@RequestBody String walkJSON) {
 		Walk n = null;
 		try {
 			n = mapper.readValue(walkJSON, Walk.class);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return walkdao.create(n);
+		 walkdao.create(n);
+		 return walkdao.index();
 	}
 
 	@RequestMapping(value = "walk/{id}", method = RequestMethod.PUT)

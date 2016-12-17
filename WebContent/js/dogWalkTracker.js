@@ -4,7 +4,7 @@ var makeForm= function(){
 	var editedDistance= $('<input type="text" id="walkDistance">');
 	var editedLength=$('<input type="text" id="lengthTime">');
 	var editedLocation= $('<input type="text" id="location">');
-	var submitButton= $('<input type="submit" value="Submit" id="submitButton">');
+	var submitButton= $('<input type="submit" value="Submit" id="addedButton">');
 	var deleteButton= $('<input type="submit" value="Delete" id="deleteButton">');
 	deleteButton.click(function(e){
 		tr.remove();
@@ -17,15 +17,10 @@ var makeForm= function(){
 	td2.html(editedLength);
 	var td3 = $('<td>');
 	td3.html(editedLocation);
-	var td4 = $('<td>');
+	var td4 = $('<td id="td4">');
 	td4.html(submitButton);
 	var td5 = $('<td>');
 	td5.html(deleteButton);
-//	dropForm.append(td0);
-//	dropForm.append(td1);
-//	dropForm.append(td2);
-//	dropForm.append(td3);
-//	dropForm.append(td4);
 	var tr = $('<tr>');
 	tr.append(td0);
 	tr.append(td1);
@@ -35,7 +30,45 @@ var makeForm= function(){
 	tr.append(td5);
 	$('#walkTable').append(tr);
 }
+var addWalk= function(addWalkButton){
+	addWalkButton.click( function (e){
+		e.preventDefault;
+		var addedButton= $('<input type="submit" value="Submit" id="addedButton">');
+		makeForm();
+		$('#submitButton').remove();
+		$('#td4').html(addedButton);
+		
+		$('#addedButton').click(function(e){
+			e.preventDefault();
+			console.log("clicked");
+			var addedWalk = {
+					dogName: $('#dogName').val(),
+					walkDistance: $('#walkDistance').val(),
+					lengthTime: $('#lengthTime').val(),
+					location: $('#location').val()
+			};
+			console.log("clicked");
+			var myReq = $.ajax({
+				type : "POST",
+				url : "api/walk",
+				dataType : "json",
+				contentType: 'application/json',
+				data: JSON.stringify(addedWalk),
+			});
+			myReq.done(function(data) {
+				console.log(data);
+				$('#addWalkButton').remove();
+				$('#greets').remove();
+				$("#walkTable").remove();
+				buildTable(data);
 
+			});
+			myReq.fail(function() {
+				console.log('It blew up again');
+			});
+		});
+	});
+}
 var editWalk= function(editButton, id){
 	editButton.click(function (e){
 		e.preventDefault;
@@ -150,6 +183,9 @@ var buildTable = function(data) {
 		table.append(tr);
 		tracker.append(table);
 	});
+	var addWalkButton= $('<input type="submit" value="Add" id="addWalkButton">');
+	tracker.append(addWalkButton);
+	addWalk(addWalkButton);
 }
 
 var displayDogTracker = function(e) {
@@ -169,20 +205,6 @@ var displayDogTracker = function(e) {
 		console.log('It blew up again');
 	});
 }
-// var displayDogById = function(id){
-// var myReq = $.ajax({
-// type: "GET",
-// url: "api/walk/" + id,
-// dataType: "json"
-// });
-// myReq.done(function( data ) {
-// console.log('This is what was returned ' + data);
-//
-// });
-// myReq.fail(function() {
-// console.log('It blew up again');
-// });
-// }
 
 $(document).ready(function(e) {
 	console.log("loaded");
