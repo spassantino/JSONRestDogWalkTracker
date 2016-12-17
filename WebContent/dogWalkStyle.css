@@ -1,0 +1,37 @@
+#footer{
+	background-image: url("http://www.fortglobalcondo.com/wp-content/uploads/2015/09/spendanimals-400x186.png");
+ 	position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 110px;
+    margin: 0 auto;
+    }
+table{
+	border-style: dashed;
+	border-color: blue;
+	outline-style: dotted;
+}
+td{
+	border-style: solid;
+	border-color: green;
+	outline-style: solid;
+}
+th{
+		outline-style: solid;
+		border-color: black;
+}
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+h1{
+	left: 50%;
+	right:50%;
+}
