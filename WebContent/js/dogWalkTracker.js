@@ -2,16 +2,11 @@ var calculateTotals= function(data){
 	 distance = 0;
 	 time = 0;
 	 locations = [];
-	
 	data.forEach(function(data){
-			locations.push(data.location);			
-		console.log(locations.length + " locations");
+		locations.push(data.location);			
 		distance = data.walkDistance + distance;
-		console.log(distance + " distance total");
 		time = data.lengthTime + time;
-		console.log(time + " total length of time");
 	});
-
 }
 var makeForm= function(){
 	var dropForm=$('<form>');
@@ -50,19 +45,15 @@ var addWalk= function(addWalkButton){
 		e.preventDefault;
 		var addedButton= $('<input type="submit" value="Submit" id="addedButton">');
 		makeForm();
-//		$('#submitButton').remove();
 		$('#td4').html(addedButton);
-		
 		$('#addedButton').click(function(e){
 			e.preventDefault();
-			console.log("clicked");
 			var addedWalk = {
 					dogName: $('#dogName').val(),
 					walkDistance: $('#walkDistance').val(),
 					lengthTime: $('#lengthTime').val(),
 					location: $('#location').val()
 			};
-			console.log("clicked");
 			var myReq = $.ajax({
 				type : "POST",
 				url : "api/walk",
@@ -71,7 +62,6 @@ var addWalk= function(addWalkButton){
 				data: JSON.stringify(addedWalk),
 			});
 			myReq.done(function(data) {
-				console.log(data);
 				$('#addWalkButton').remove();
 				$('#greets').remove();
 				$("#walkTable").remove();
@@ -86,18 +76,9 @@ var addWalk= function(addWalkButton){
 var editWalk= function(editButton, id){
 	editButton.click(function (e){
 		e.preventDefault;
-		console.log("clicked");
-//		var submitButton= $('<input type="submit" value="Submit" id="submitButton">');
-//		$('#td4').html(submitButton);
-
 		makeForm();
 		$('#addedButton').click(function(e){
 			$('#addWalkButton').remove();
-			var distance = 0;
-			var time = 0;
-			var locations = [];
-//			e.preventDefault;
-			console.log("submit");
 		var editedWalk = {
 				dogName: $('#dogName').val(),
 				walkDistance: $('#walkDistance').val(),
@@ -113,7 +94,6 @@ var editWalk= function(editButton, id){
 			data: JSON.stringify(editedWalk),
 		});
 		myReq.done(function(data) {
-			console.log(data);
 			$('#greets').remove();
 			$("#walkTable").remove();
 			displayDogTracker();
@@ -128,14 +108,12 @@ var editWalk= function(editButton, id){
 var deleteWalk= function(deleteButton, id){
 	deleteButton.click(function (e){
 		e.preventDefault;
-		console.log("clicked");
 		var myReq = $.ajax({
 			type : "DELETE",
 			url : "api/walk/" + id,
 			dataType : "json"
 		});
 		myReq.done(function(data) {
-			console.log(data);
 			$('#addWalkButton').remove();
 			$('#greets').remove();
 			$("#walkTable").remove();
@@ -174,7 +152,6 @@ var buildTable = function(data) {
 	th4.text("Edit");
 	th5.text("Delete");
 	tracker.append(h1);
-	
 	data.forEach(function(data) {
 		var tr = $('<tr>');
 		var editButton = $('<input type="button" value="Edit" id="' + data.id
@@ -183,8 +160,6 @@ var buildTable = function(data) {
 		var deleteButton = $('<input type="button" value="Delete" id="' + data.id
 				+ '">');
 		deleteWalk(deleteButton, data.id);
-
-		console.log(data);
 		var dogNameCell = $('<td>');
 		dogNameCell.text(data.dogName);
 		var distanceCell = $('<td>');
@@ -216,9 +191,7 @@ var buildTable = function(data) {
 	totals.append(totalLabel,totalDistance,totalTime,numOfLocations);
 	table.append(totals);
 	tracker.append(addWalkButton);
-
 }
-
 var displayDogTracker = function(e) {
 	var myReq = $.ajax({
 		type : "GET",
@@ -226,8 +199,6 @@ var displayDogTracker = function(e) {
 		dataType : "json"
 	});
 	myReq.done(function(data) {
-		console.log(data);
-		console.log("test")
 		calculateTotals(data);
 		buildTable(data);
 		
@@ -238,7 +209,5 @@ var displayDogTracker = function(e) {
 }
 
 $(document).ready(function(e) {
-	console.log("loaded");
 	displayDogTracker();
-
 });
