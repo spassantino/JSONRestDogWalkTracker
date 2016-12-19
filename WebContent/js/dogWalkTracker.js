@@ -124,7 +124,6 @@ var deleteWalk= function(deleteButton, id){
 		});
 	});
 }
-
 var buildTable = function(data) {
 	var h1 = $('<h1 id="greets">').text("Dog Walking Tracker");
 	var tracker = $('#tracker');
@@ -181,7 +180,7 @@ var buildTable = function(data) {
 		table.append(tr);
 		tracker.append(table);
 	});
-	var addWalkButton= $('<input type="submit" value="Add" id="addWalkButton">');
+	var addWalkButton= $('<input type="submit" value="Add Record" id="addWalkButton">');
 	addWalk(addWalkButton);
 	var totals = $('<tr>');
 	var totalLabel = $('<td>').text("Totals");
@@ -201,13 +200,11 @@ var displayDogTracker = function(e) {
 	myReq.done(function(data) {
 		calculateTotals(data);
 		buildTable(data);
-		
 	});
 	myReq.fail(function() {
 		console.log('It blew up again');
 	});
 }
-
 $(document).ready(function(e) {
 	displayDogTracker();
 });

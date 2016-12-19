@@ -10,6 +10,7 @@ table{
 	border-style: dashed;
 	border-color: blue;
 	outline-style: dotted;
+	    margin: 30px;
 }
 td{
 	border-style: solid;
@@ -32,6 +33,7 @@ html {
     height: 100%;
 }
 h1{
+	margin: 30px;
 	left: 50%;
 	right:50%;
 }
