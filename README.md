@@ -2,7 +2,7 @@
 
 #Overview
 
-In week eleven of Skill Distillery, we were assigned to complete a project implementing SpringRest, JavaScript, jQuery, JSON and AJAX. The project had to follow a theme of 'Event Tracker.'
+In week eleven of Skill Distillery, we were assigned to complete a project implementing SpringRest, JavaScript, jQuery, JSON and AJAX. The project had to follow the theme of an 'Event Tracker.'
 
 #Project Objectives
 
