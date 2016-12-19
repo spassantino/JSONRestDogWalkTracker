@@ -35,6 +35,6 @@ http://35.162.181.226:8080/DogWalk/
 ...and that's it. It's that easy!
 
 #Additional info
-To see the JPA side of this project, please click on the following link which will take you to my "JSONRestDogWalkTracker" repository:
+To see the JPA side of this project, please click on the following link which will take you to my "DogWalkTrackerJPA" repository:
 
-https://github.com/spassantino/JSONRestDogWalkTracker.git
+https://github.com/spassantino/DogWalkTrackerJPA.git
