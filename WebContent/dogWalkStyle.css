@@ -25,6 +25,8 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
+	font-family: sans-serif;
+	font: sans-serif;
 }
 
 html {
@@ -36,4 +38,9 @@ h1{
 	margin: 30px;
 	left: 50%;
 	right:50%;
+	text-decoration: blink;
+}
+.buttons:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
 }

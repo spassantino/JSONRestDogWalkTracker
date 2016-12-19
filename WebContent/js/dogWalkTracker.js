@@ -14,8 +14,8 @@ var makeForm= function(){
 	var editedDistance= $('<input type="text" id="walkDistance">');
 	var editedLength=$('<input type="text" id="lengthTime">');
 	var editedLocation= $('<input type="text" id="location">');
-	var submitButton= $('<input type="submit" value="Submit" id="addedButton">');
-	var deleteButton= $('<input type="submit" value="Delete" id="deleteButton">');
+	var submitButton= $('<input type="submit" value="Submit" id="addedButton" class="buttons">');
+	var deleteButton= $('<input type="submit" value="Delete" id="deleteButton" class="buttons">');
 	deleteButton.click(function(e){
 		tr.remove();
 	});
@@ -43,7 +43,7 @@ var makeForm= function(){
 var addWalk= function(addWalkButton){
 	addWalkButton.click( function (e){
 		e.preventDefault;
-		var addedButton= $('<input type="submit" value="Submit" id="addedButton">');
+		var addedButton= $('<input type="submit" value="Submit" id="addedButton" class="buttons">');
 		makeForm();
 		$('#td4').html(addedButton);
 		$('#addedButton').click(function(e){
@@ -154,10 +154,10 @@ var buildTable = function(data) {
 	data.forEach(function(data) {
 		var tr = $('<tr>');
 		var editButton = $('<input type="button" value="Edit" id="' + data.id
-				+ '">');
+				+ '" class="buttons">');
 		editWalk(editButton, data.id);
 		var deleteButton = $('<input type="button" value="Delete" id="' + data.id
-				+ '">');
+				+ '" class="buttons">');
 		deleteWalk(deleteButton, data.id);
 		var dogNameCell = $('<td>');
 		dogNameCell.text(data.dogName);
@@ -180,7 +180,7 @@ var buildTable = function(data) {
 		table.append(tr);
 		tracker.append(table);
 	});
-	var addWalkButton= $('<input type="submit" value="Add Record" id="addWalkButton">');
+	var addWalkButton= $('<input type="submit" value="Add Record" id="addWalkButton" class="buttons">');
 	addWalk(addWalkButton);
 	var totals = $('<tr>');
 	var totalLabel = $('<td>').text("Totals");
