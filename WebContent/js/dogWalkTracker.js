@@ -1,3 +1,26 @@
+var distance = 0;
+var time = 0;
+var locations = [];
+var calculateTotals= function(data){
+	data.forEach(function(data){
+//		if (!locations[0]){
+			locations.push(data.location);			
+//		}
+			
+		
+		console.log(locations.length + " locations");
+		distance = data.walkDistance + distance;
+		console.log(distance + " distance total");
+		time = data.lengthTime + time;
+		console.log(time + " total length of time");
+	});
+//	locations.forEach(function (location){
+//		if (location===data.location){
+//			locations.pop();
+//		}
+//	});
+	
+}
 var makeForm= function(){
 	var dropForm=$('<form>');
 	var editedName= $('<input type="text" id="dogName">');
@@ -94,8 +117,6 @@ var editWalk= function(editButton, id){
 		myReq.done(function(data) {
 			console.log(data);
 
-//			buildTable(data);
-
 		});
 		myReq.fail(function() {
 			console.log('It blew up again');
@@ -114,6 +135,7 @@ var deleteWalk= function(deleteButton, id){
 		});
 		myReq.done(function(data) {
 			console.log(data);
+			$('#addWalkButton').remove();
 			$('#greets').remove();
 			$("#walkTable").remove();
 			buildTable(data);
@@ -152,6 +174,7 @@ var buildTable = function(data) {
 	th4.text("Edit");
 	th5.text("Delete");
 	tracker.append(h1);
+
 	data.forEach(function(data) {
 		var tr = $('<tr>');
 		var editButton = $('<input type="button" value="Edit" id="' + data.id
@@ -184,8 +207,16 @@ var buildTable = function(data) {
 		tracker.append(table);
 	});
 	var addWalkButton= $('<input type="submit" value="Add" id="addWalkButton">');
-	tracker.append(addWalkButton);
 	addWalk(addWalkButton);
+	var totals = $('<tr>');
+	var totalLabel = $('<td>').text("Totals");
+	var totalDistance = $('<td>').text(distance);
+	var totalTime = $('<td>').text(time);
+	var numOfLocations = $('<td id=locations>').text(locations.length);
+	totals.append(totalLabel,totalDistance,totalTime,numOfLocations);
+	table.append(totals);
+	tracker.append(addWalkButton);
+
 }
 
 var displayDogTracker = function(e) {
@@ -198,8 +229,9 @@ var displayDogTracker = function(e) {
 		console.log(data);
 		console.log("test")
 
+		calculateTotals(data);
 		buildTable(data);
-
+		
 	});
 	myReq.fail(function() {
 		console.log('It blew up again');
