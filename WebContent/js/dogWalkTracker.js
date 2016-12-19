@@ -1,25 +1,17 @@
-var distance = 0;
-var time = 0;
-var locations = [];
 var calculateTotals= function(data){
+	 distance = 0;
+	 time = 0;
+	 locations = [];
+	
 	data.forEach(function(data){
-//		if (!locations[0]){
 			locations.push(data.location);			
-//		}
-			
-		
 		console.log(locations.length + " locations");
 		distance = data.walkDistance + distance;
 		console.log(distance + " distance total");
 		time = data.lengthTime + time;
 		console.log(time + " total length of time");
 	});
-//	locations.forEach(function (location){
-//		if (location===data.location){
-//			locations.pop();
-//		}
-//	});
-	
+
 }
 var makeForm= function(){
 	var dropForm=$('<form>');
@@ -58,7 +50,7 @@ var addWalk= function(addWalkButton){
 		e.preventDefault;
 		var addedButton= $('<input type="submit" value="Submit" id="addedButton">');
 		makeForm();
-		$('#submitButton').remove();
+//		$('#submitButton').remove();
 		$('#td4').html(addedButton);
 		
 		$('#addedButton').click(function(e){
@@ -83,8 +75,7 @@ var addWalk= function(addWalkButton){
 				$('#addWalkButton').remove();
 				$('#greets').remove();
 				$("#walkTable").remove();
-				buildTable(data);
-
+				displayDogTracker();
 			});
 			myReq.fail(function() {
 				console.log('It blew up again');
@@ -95,11 +86,18 @@ var addWalk= function(addWalkButton){
 var editWalk= function(editButton, id){
 	editButton.click(function (e){
 		e.preventDefault;
+		console.log("clicked");
+//		var submitButton= $('<input type="submit" value="Submit" id="submitButton">');
+//		$('#td4').html(submitButton);
 
 		makeForm();
-		$('#submitButton').click(function(e){
-			e.preventDefault;
-
+		$('#addedButton').click(function(e){
+			$('#addWalkButton').remove();
+			var distance = 0;
+			var time = 0;
+			var locations = [];
+//			e.preventDefault;
+			console.log("submit");
 		var editedWalk = {
 				dogName: $('#dogName').val(),
 				walkDistance: $('#walkDistance').val(),
@@ -116,6 +114,9 @@ var editWalk= function(editButton, id){
 		});
 		myReq.done(function(data) {
 			console.log(data);
+			$('#greets').remove();
+			$("#walkTable").remove();
+			displayDogTracker();
 
 		});
 		myReq.fail(function() {
@@ -138,8 +139,7 @@ var deleteWalk= function(deleteButton, id){
 			$('#addWalkButton').remove();
 			$('#greets').remove();
 			$("#walkTable").remove();
-			buildTable(data);
-
+			displayDogTracker();
 		});
 		myReq.fail(function() {
 			console.log('It blew up again');
@@ -174,7 +174,7 @@ var buildTable = function(data) {
 	th4.text("Edit");
 	th5.text("Delete");
 	tracker.append(h1);
-
+	
 	data.forEach(function(data) {
 		var tr = $('<tr>');
 		var editButton = $('<input type="button" value="Edit" id="' + data.id
@@ -228,7 +228,6 @@ var displayDogTracker = function(e) {
 	myReq.done(function(data) {
 		console.log(data);
 		console.log("test")
-
 		calculateTotals(data);
 		buildTable(data);
 		
